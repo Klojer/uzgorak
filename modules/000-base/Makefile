@@ -15,6 +15,7 @@ ifndef FONT
 	$(error FONT is undefined)
 endif
 	wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$(FONT_VERSION)/$(FONT).zip"
+	mkdir -p $(FONTS_DIR)
 	unzip "$(FONT).zip" -d "$(FONTS_DIR)"
 	rm "$(FONT).zip"
 	find "$(FONTS_DIR)" -name '*Windows Compatible*' -delete
