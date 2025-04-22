@@ -1,5 +1,5 @@
 include ../../common_cache.mk
-include ../0010-bash/include.mk
+include ../001-bash/include.mk
 
 VERSION=v0.15.0
 BASH_ASDF_SH = ". '$$HOME/.asdf/asdf.sh'"
