@@ -1,4 +1,4 @@
-# Talaka
+# Uzgorak
 
 Personal Environment Bootstrap Tool
 
