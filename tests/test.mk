@@ -13,7 +13,7 @@ DOCKER_IMAGE = $(CONTAINER_REGISTRY)/$(APPLICATION_NAME):$(APPLICATION_TAG)
 all: docker/build docker/run
 
 docker/build:
-	docker build -t $(DOCKER_IMAGE) .
+	docker build -t $(DOCKER_IMAGE) -f tests/Dockerfile .
 
 docker/run:
 	docker run --rm $(DOCKER_IMAGE)
