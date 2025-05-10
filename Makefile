@@ -1,6 +1,6 @@
 include ./lib/const.mk
 
-VERSION = 0.3.0
+VERSION = 0.4.0
 
 MODULES_PATH = ./modules
 
@@ -111,5 +111,12 @@ version:
 
 .PHONY: test
 test:
-	@$(MAKE) -f test.mk
+	@$(MAKE) -f tests/test.mk
+
+.PHONY: test-pipeline
+test-pipeline:
+	@$(MAKE) -s install
+	@$(MAKE) -s list
+	@$(MAKE) -s remove
+	@$(MAKE) -s list
 
