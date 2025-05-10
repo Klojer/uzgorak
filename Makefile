@@ -1,5 +1,4 @@
-
-include lib/const.mk
+include ./lib/const.mk
 
 VERSION = 0.2.0
 
@@ -15,25 +14,25 @@ all: install
 .PHONY: install
 install:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/install/$$mod; \
+		$(MAKE) -s module/install/$$mod || exit $$?; \
 	done
 
 .PHONY: remove
 remove:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/remove/$$mod; \
+		$(MAKE) -s module/remove/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-installed
 mark-as-installed:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/mark-as-installed/$$mod; \
+		$(MAKE) -s module/mark-as-installed/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-removed
 mark-as-removed:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/mark-as-removed/$$mod; \
+		$(MAKE) -s module/mark-as-removed/$$mod || exit $$?; \
 	done
 
 define module-install
@@ -104,3 +103,9 @@ list:
 .PHONY: version
 version:
 	@echo $(VERSION)
+
+
+.PHONY: test
+test:
+	@$(MAKE) -f test.mk
+

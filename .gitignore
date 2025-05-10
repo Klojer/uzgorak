@@ -1,4 +1,6 @@
 */**/.cache/**
 */**/*.ignore
 .archive/**
+modules/001-one/**
+modules/002-two/**
 
