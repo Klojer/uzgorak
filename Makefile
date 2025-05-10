@@ -36,6 +36,7 @@ mark-as-removed:
 	done
 
 define module-install
+.PHONY: module/install/$(1)
 module/install/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_INSTALL)
 endef
@@ -43,6 +44,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-install,$(mod))))
 
 define module-remove
+.PHONY: module/remove/$(1)
 module/remove/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_REMOVE)
 endef
@@ -50,6 +52,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-remove,$(mod))))
 
 define module-mark-as-installed
+.PHONY: module/mark-as-installed/$(1)
 module/mark-as-installed/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-installed
 endef
