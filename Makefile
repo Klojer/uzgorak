@@ -1,7 +1,6 @@
+include ./lib/const.mk
 
-include lib/const.mk
-
-VERSION = 0.2.0
+VERSION = 0.3.0
 
 MODULES_PATH = ./modules
 
@@ -15,28 +14,29 @@ all: install
 .PHONY: install
 install:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/install/$$mod; \
+		$(MAKE) -s module/install/$$mod || exit $$?; \
 	done
 
 .PHONY: remove
 remove:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/remove/$$mod; \
+		$(MAKE) -s module/remove/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-installed
 mark-as-installed:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/mark-as-installed/$$mod; \
+		$(MAKE) -s module/mark-as-installed/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-removed
 mark-as-removed:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/mark-as-removed/$$mod; \
+		$(MAKE) -s module/mark-as-removed/$$mod || exit $$?; \
 	done
 
 define module-install
+.PHONY: module/install/$(1)
 module/install/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_INSTALL)
 endef
@@ -44,6 +44,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-install,$(mod))))
 
 define module-remove
+.PHONY: module/remove/$(1)
 module/remove/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_REMOVE)
 endef
@@ -51,6 +52,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-remove,$(mod))))
 
 define module-mark-as-installed
+.PHONY: module/mark-as-installed/$(1)
 module/mark-as-installed/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-installed
 endef
@@ -58,6 +60,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-mark-as-installed,$(mod))))
 
 define module-mark-as-removed
+.PHONY: module/mark-as-removed/$(1)
 module/mark-as-removed/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-removed
 endef
@@ -104,3 +107,9 @@ list:
 .PHONY: version
 version:
 	@echo $(VERSION)
+
+
+.PHONY: test
+test:
+	@$(MAKE) -f test.mk
+
