@@ -1,6 +1,6 @@
 include ./lib/const.mk
 
-VERSION = 0.2.0
+VERSION = 0.3.0
 
 MODULES_PATH = ./modules
 
@@ -60,6 +60,7 @@ endef
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-mark-as-installed,$(mod))))
 
 define module-mark-as-removed
+.PHONY: module/mark-as-removed/$(1)
 module/mark-as-removed/$(1):
 	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-removed
 endef
