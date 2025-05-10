@@ -1,4 +1,4 @@
-include ../../common_cache.mk
+include ../../lib/const.mk ../../lib/cache.mk
 include ../001-bash/include.mk
 
 VERSION=v0.15.0

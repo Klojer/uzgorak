@@ -1,4 +1,4 @@
-include ../../common_cache.mk
+include ../../lib/const.mk ../../lib/cache.mk
 
 INIT_PACKAGES=git curl wget unzip stow build-essential checkinstall
 
