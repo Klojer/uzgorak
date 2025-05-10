@@ -1,0 +1,7 @@
+
+CACHE_DIR = .cache
+INSTALL = install
+REMOVE = remove
+
+CACHED_INSTALL = $(CACHE_DIR)/$(INSTALL)
+CACHED_REMOVE = $(CACHE_DIR)/$(REMOVE)
