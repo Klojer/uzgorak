@@ -17,8 +17,13 @@ asdf/global:
 	$(MAKE) asdf/ensure-params
 	@bash -i -c "asdf global $(PLUGIN) $(VERSION)"
 
-asdf/remove:
+asdf/remove/version:
 	$(MAKE) asdf/ensure-params
 	@bash -i -c "asdf uninstall $(PLUGIN) $(VERSION)"
+
+asdf/remove/plugin:
+ifndef PLUGIN
+	$(error PLUGIN is undefined)
+endif
 	@bash -i -c "asdf plugin remove $(PLUGIN)"
 
