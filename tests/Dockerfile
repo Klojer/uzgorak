@@ -9,4 +9,7 @@ COPY ./Makefile .
 COPY ./lib/ lib/
 COPY ./tests/modules/ modules/
 
+ENV USER="root"
+ENV PWD="/app"
+
 CMD [ "make", "test-pipeline" ]
