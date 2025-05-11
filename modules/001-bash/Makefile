@@ -1,4 +1,4 @@
-include ../../lib/const.mk ../../lib/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
 include ./include.mk
 
 BASHRC_PATH_LOCAL_BIN = 'PATH=$(HOME)/.local/bin:$$$$PATH'
