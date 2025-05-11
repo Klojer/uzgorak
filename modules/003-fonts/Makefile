@@ -1,4 +1,4 @@
-include ../../lib/const.mk ../../lib/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
 
 FONT_VERSION = 3.3.0
 FONTS_DIR = $(HOME)/.local/share/fonts/custom

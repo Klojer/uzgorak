@@ -1,4 +1,4 @@
-include ../../lib/const.mk ../../lib/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
 
 install:
 	@echo "Install module two"

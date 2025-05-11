@@ -1,8 +1,11 @@
-include ./lib/const.mk
+include $(PWD)/lib/const.mk
 
-VERSION = 0.4.1
+VERSION = 0.4.2
 
-MODULES_PATH = ./modules
+LIBS_PATH := $(PWD)/lib
+export LIBS_PATH
+
+MODULES_PATH ?= ./modules
 
 MODULES := $(shell find $(MODULES_PATH) -type f -name 'Makefile' -exec dirname {} \; | xargs -n1 basename)
 MODULES_SORTED = $(shell printf "%s\n" $(MODULES) | sort)

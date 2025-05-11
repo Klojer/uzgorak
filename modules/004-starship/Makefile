@@ -1,4 +1,4 @@
-include ../../lib/const.mk ../../lib/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
 include ../000-base/include.mk
 include ../001-bash/include.mk
 include ../002-asdf/include.mk

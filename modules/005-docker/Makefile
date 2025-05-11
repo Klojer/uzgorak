@@ -1,4 +1,4 @@
-include ../../lib/const.mk ../../lib/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
 
 ARCH := $(shell dpkg --print-architecture)
 DISTRO_NAME := $(shell . /etc/os-release && echo "$${UBUNTU_CODENAME:-$VERSION_CODENAME}")
