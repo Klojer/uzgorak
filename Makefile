@@ -1,6 +1,6 @@
 include ./lib/const.mk
 
-VERSION = 0.4.0
+VERSION = 0.4.1
 
 MODULES_PATH = ./modules
 
