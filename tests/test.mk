@@ -17,3 +17,6 @@ docker/build:
 
 docker/run:
 	docker run --rm $(DOCKER_IMAGE)
+
+docker/shell: docker/build
+	docker run --rm -it $(DOCKER_IMAGE) /bin/bash

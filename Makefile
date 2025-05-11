@@ -113,6 +113,10 @@ version:
 test:
 	@$(MAKE) -f tests/test.mk
 
+.PHONY: test/shell
+test/shell:
+	@$(MAKE) -f tests/test.mk docker/shell
+
 .PHONY: test-pipeline
 test-pipeline:
 	@$(MAKE) -s install
