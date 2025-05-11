@@ -1,5 +1,6 @@
+include ./lib/const.mk
 
-VERSION = 0.1.0
+VERSION = 0.4.1
 
 MODULES_PATH = ./modules
 
@@ -13,44 +14,60 @@ all: install
 .PHONY: install
 install:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/install MOD=$$mod; \
+		$(MAKE) -s module/install/$$mod || exit $$?; \
 	done
 
 .PHONY: remove
 remove:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/remove MOD=$$mod; \
+		$(MAKE) -s module/remove/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-installed
 mark-as-installed:
 	@for mod in $(MODULES_SORTED); do \
-		$(MAKE) -s module/mark-as-installed MOD=$$mod; \
+		$(MAKE) -s module/mark-as-installed/$$mod || exit $$?; \
 	done
 
 .PHONY: mark-as-removed
 mark-as-removed:
 	@for mod in $(MODULES_REVERSED); do \
-		$(MAKE) -s module/mark-as-removed MOD=$$mod; \
+		$(MAKE) -s module/mark-as-removed/$$mod || exit $$?; \
 	done
 
-.PHONY: module/install
-module/install:
-	$(MAKE) -s module/process TASK=.cache/install
+define module-install
+.PHONY: module/install/$(1)
+module/install/$(1):
+	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_INSTALL)
+endef
 
-.PHONY: module/remove
-module/remove:
-	$(MAKE) -s module/process TASK=remove-pipeline
+$(foreach mod, $(MODULES_SORTED), $(eval $(call module-install,$(mod))))
 
-.PHONY: module/mark-as-installed
-module/mark-as-installed:
-	$(MAKE) -s module/process TASK=mark-as-installed
+define module-remove
+.PHONY: module/remove/$(1)
+module/remove/$(1):
+	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_REMOVE)
+endef
 
-.PHONY: module/mark-as-removed
-module/mark-as-removed:
-	$(MAKE) -s module/process TASK=mark-as-removed
+$(foreach mod, $(MODULES_SORTED), $(eval $(call module-remove,$(mod))))
 
-.PHONY: module/process
+define module-mark-as-installed
+.PHONY: module/mark-as-installed/$(1)
+module/mark-as-installed/$(1):
+	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-installed
+endef
+
+$(foreach mod, $(MODULES_SORTED), $(eval $(call module-mark-as-installed,$(mod))))
+
+define module-mark-as-removed
+.PHONY: module/mark-as-removed/$(1)
+module/mark-as-removed/$(1):
+	@$(MAKE) -s module/process MOD=$(1) TASK=mark-as-removed
+endef
+
+$(foreach mod, $(MODULES_SORTED), $(eval $(call module-mark-as-removed,$(mod))))
+
+
 module/process:
 ifndef TASK
 	$(error TASK is undefined)
@@ -90,3 +107,20 @@ list:
 .PHONY: version
 version:
 	@echo $(VERSION)
+
+
+.PHONY: test
+test:
+	@$(MAKE) -f tests/test.mk
+
+.PHONY: test/shell
+test/shell:
+	@$(MAKE) -f tests/test.mk docker/shell
+
+.PHONY: test-pipeline
+test-pipeline:
+	@$(MAKE) -s install
+	@$(MAKE) -s list
+	@$(MAKE) -s remove
+	@$(MAKE) -s list
+
