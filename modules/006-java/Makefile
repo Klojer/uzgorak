@@ -1,4 +1,4 @@
-include ../../common_cache.mk
+include ../../lib/const.mk ../../lib/cache.mk
 include ../002-asdf/include.mk
 
 PLUGIN=java
@@ -11,5 +11,6 @@ install:
 	@$(MAKE) asdf/global PLUGIN=$(PLUGIN) VERSION=$(VERSION_LTS)
 
 remove:
-	@$(MAKE) asdf/remove PLUGIN=$(PLUGIN) VERSION=$(VERSION_LATEST)
-	@$(MAKE) asdf/remove PLUGIN=$(PLUGIN) VERSION=$(VERSION_LTS)
+	@$(MAKE) asdf/remove/version PLUGIN=$(PLUGIN) VERSION=$(VERSION_LATEST)
+	@$(MAKE) asdf/remove/version PLUGIN=$(PLUGIN) VERSION=$(VERSION_LTS)
+	@$(MAKE) asdf/remove/plugin PLUGIN=$(PLUGIN)

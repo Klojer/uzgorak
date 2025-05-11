@@ -1,4 +1,4 @@
-include ../../common_cache.mk
+include ../../lib/const.mk ../../lib/cache.mk
 include ../000-base/include.mk
 include ../001-bash/include.mk
 include ../002-asdf/include.mk
@@ -17,4 +17,5 @@ install:
 remove:
 	@$(MAKE) base/stow/remove DIR=./stow
 	@$(MAKE) bash/remove-line VALUE=$(STARSHIP_HOOK)
-	@$(MAKE) asdf/remove PLUGIN=$(PLUGIN) VERSION=$(VERSION)
+	@$(MAKE) asdf/remove/version PLUGIN=$(PLUGIN) VERSION=$(VERSION)
+	@$(MAKE) asdf/remove/plugin PLUGIN=$(PLUGIN)
