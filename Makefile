@@ -1,6 +1,6 @@
-include ./lib/const.mk
+include $(PWD)/lib/const.mk
 
-VERSION = 0.4.1
+VERSION = 0.4.2
 
 MODULES_PATH = ./modules
 
