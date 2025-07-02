@@ -1,13 +1,17 @@
 include $(PWD)/lib/const.mk
 
-VERSION = 0.4.3
+VERSION = 0.5.0
 
 LIBS_PATH := $(PWD)/lib
 export LIBS_PATH
 
 MODULES_PATH ?= ./modules
 
-MODULES := $(shell find $(MODULES_PATH) -type f -name 'Makefile' -exec dirname {} \; | xargs -n1 basename)
+MODULES_DEFAULT := $(shell find $(MODULES_PATH) -type f -name 'Makefile' -exec dirname {} \; | xargs -n1 basename)
+ifeq ($(MODULES),)
+	MODULES := $(MODULES_DEFAULT)
+endif
+
 MODULES_SORTED = $(shell printf "%s\n" $(MODULES) | sort)
 MODULES_REVERSED = $(shell printf "%s\n" $(MODULES) | sort -r)
 
