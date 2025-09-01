@@ -1,6 +1,6 @@
 include $(PWD)/lib/const.mk
 
-VERSION = 0.5.0
+VERSION = 0.6.0
 
 LIBS_PATH := $(PWD)/lib
 export LIBS_PATH
