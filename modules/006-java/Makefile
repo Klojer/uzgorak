@@ -1,4 +1,4 @@
-include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/state.mk
 include ../002-asdf/include.mk
 
 PLUGIN=java
