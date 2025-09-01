@@ -21,7 +21,7 @@ Describe, maintain and restore personal Linux environment.
 ### Template of new module Makefile
 
 ```makefile
-include $(LIBS_PATH)/const.mk $(LIBS_PATH)/cache.mk
+include $(LIBS_PATH)/const.mk $(LIBS_PATH)/state.mk
 
 install:
   # commands to install module
