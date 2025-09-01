@@ -45,7 +45,7 @@ mark-as-removed:
 define module-install
 .PHONY: module/install/$(1)
 module/install/$(1):
-	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_INSTALL)
+	@$(MAKE) -s module/process MOD=$(1) TASK=$(STATE_INSTALL)
 endef
 
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-install,$(mod))))
@@ -53,7 +53,7 @@ $(foreach mod, $(MODULES_SORTED), $(eval $(call module-install,$(mod))))
 define module-remove
 .PHONY: module/remove/$(1)
 module/remove/$(1):
-	@$(MAKE) -s module/process MOD=$(1) TASK=$(CACHED_REMOVE)
+	@$(MAKE) -s module/process MOD=$(1) TASK=$(STATE_REMOVE)
 endef
 
 $(foreach mod, $(MODULES_SORTED), $(eval $(call module-remove,$(mod))))
@@ -98,7 +98,7 @@ list:
 	@for mod in $(MODULES_SORTED); do \
 		install_status=""; \
 		ignore_status=""; \
-		if [ -f "$(MODULES_PATH)/$$mod/.cache/install" ]; then \
+		if [ -f "$(MODULES_PATH)/$$mod/$(STATE_DIR)/install" ]; then \
 			install_status="installed;"; \
 		fi; \
 		if [ -f "$(MODULES_PATH)/$$mod/.ignore" ]; then \

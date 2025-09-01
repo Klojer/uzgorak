@@ -1,16 +1,16 @@
 -include const.mk
 
-all: $(CACHED_INSTALL)
+all: $(STATE_INSTALL)
 
-$(CACHED_INSTALL):
-	@mkdir -p $(CACHE_DIR)
+$(STATE_INSTALL):
+	@mkdir -p $(STATE_DIR)
 ifeq ($(TEST_ENV), true)
 	@$(MAKE) test-install
 endif
 	@$(MAKE) install
 	@$(MAKE) mark-as-installed-default
 
-$(CACHED_REMOVE):
+$(STATE_REMOVE):
 ifeq ($(TEST_ENV), true)
 	@$(MAKE) test-remove
 endif
@@ -30,11 +30,11 @@ test-remove-default:
 	@echo "Default test-remove logic: Override this in module's Makefile"
 
 mark-as-installed-default:
-	@mkdir -p $(CACHE_DIR)
-	@echo "Mark as installed at $(shell date)" > $(CACHE_DIR)/$(INSTALL)
+	@mkdir -p $(STATE_DIR)
+	@echo "Mark as installed at $(shell date)" > $(STATE_DIR)/$(INSTALL)
 
 mark-as-removed-default:
-	@rm -rf $(CACHE_DIR)/$(INSTALL)
+	@rm -rf $(STATE_DIR)/$(INSTALL)
 
 %:  %-default
 	@  true
