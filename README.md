@@ -8,9 +8,10 @@ Describe, maintain and restore personal Linux environment.
 
 ## How to use
 
-1. Make for of the repo
-2. Checkout one of the predefined branches (depends on your needs)
-3. Add new modules to directory `modules` using examples (see [examples](https://github.com/Klojer/uzgorak/tree/example/modules))
+1. Clone the repo
+2. Checkout one of the predefined branches depends on your needs. `Main` has no modules at all, you will start from scratch. `Base` can be used as reference with minimal modules for Ubuntu based distributive. `Examples` can show insights of modules composing.
+3. Add new modules to directory `modules` (see [examples](https://github.com/Klojer/uzgorak/tree/example/modules))
+4. Use commands from list bellow to manage modules state
 
 ## How to create new module
 
@@ -32,7 +33,7 @@ remove:
 
 ## Commands
 
-### List all supported modules
+### List all supported modules and their state
 
 ```sh
 make list
@@ -41,11 +42,31 @@ make list
 ### Install all modules
 
 ```sh
-make all
+make install
+```
+
+### Test modules
+
+```shell
+make test
 ```
 
 ### Remove all modules
 
 ```sh
 make remove
+```
+
+### Per module commands
+
+Install:
+
+```shell
+make module/install/XXX-your-module
+```
+
+Remove:
+
+```shell
+make module/remove/XXX-your-module
 ```
